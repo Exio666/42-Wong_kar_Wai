@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:01:12 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/19 14:54:30 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/19 15:52:48 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ int main()
 		else if (i == -1)
 			continue;
 		if (i == KEY_LEFT)
-			ft_printf("Left\n\r");
+			do_action(board, i);
 		else if (i == KEY_RIGHT)
-			ft_printf("Right\n\r");
+			do_action(board, i);
 		else if (i == KEY_UP)
 			do_action(board, i);
 		else if (i == KEY_DOWN)
-			ft_printf("Down\n\r");
+			do_action(board, i);
 		else if (i == D_ESCAPE || i == D_NCURS_SIGINT)
 		{
 			ft_printf("Esc\n\r");
