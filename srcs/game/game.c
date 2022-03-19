@@ -12,6 +12,50 @@
 
 #include "2048.h"
 
+int playable(int board[4][4])
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (board[i][j] == 0)
+				return (true);
+			for (int k = j; k < 4; ++k)
+			{
+				if (board[i][j] == board[i][k] || board[i][j] == board[k][j])
+					return (true);
+			}
+		}
+	}
+	return (false);
+}
+
+int is_full(int board[4][4])
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (board[i][j] == 0)
+				return (false);
+		}
+	}
+	return (true);
+}
+
+int player_won(int board[4][4])
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (board[i][j] >= 2048)
+				return (true);
+		}
+	}
+	return (false);
+}
+
 int choose_bloc()
 {
 	int nbr;
