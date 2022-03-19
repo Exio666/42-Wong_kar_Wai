@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmorris <tmorris@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:01:12 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/19 12:03:57 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/19 14:47:51 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ncurses.h>
-#include <all_lib.h>
+#include "2048.h"
 
 static void print_divider_row(int box_w)
 {

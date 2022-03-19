@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:00:45 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/19 14:12:34 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/19 15:06:42 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int choose_bloc()
 {
 	int nbr;
 	
-	srand(time(NULL));
 	nbr = rand();
 	nbr = nbr % 10;
 	if (nbr == 0)
@@ -29,13 +28,12 @@ int choose_place()
 {
 	int nbr;
 	
-	srand(time(NULL));
 	nbr = rand();
 	nbr = nbr % 4;
 	return (nbr);
 }
 
-void init_tab(int **tab)
+void init_tab(int tab[4][4])
 {
 	int x;
 	int y;
@@ -60,7 +58,7 @@ void init_tab(int **tab)
 	}
 }
 
-void	join_up(int **tab)
+void	join_up(int tab[4][4])
 {
 	int x1;
 	int x2;
@@ -76,11 +74,11 @@ void	join_up(int **tab)
 			while (tab[x1][y] == 0 && x1 < 4)
 				x1++;
 			x2 = x1 + 1;
-			if (x1 < 4 || x2 < 4)
+			if (x1 >= 4 || x2 >= 4)
 				break;
 			while (tab[x2][y] == 0 && x2 < 4)
 				x2++;
-			if (x1 < 4 || x2 < 4)
+			if (x1 >= 4 || x2 >= 4)
 				break;
 			if (tab[x2][y] == tab[x1][y] && tab[x2][y] != 0)
 			{
@@ -93,7 +91,7 @@ void	join_up(int **tab)
 	}	
 }
 
-void	deplace_up(int **tab)
+int	deplace_up(int tab[4][4])
 {
 	int stock[4];
 	int y;
@@ -101,6 +99,7 @@ void	deplace_up(int **tab)
 	int i;
 
 	y = 0;
+	change = 0;
 	while (y < 4)
 	{
 		ft_bzero(stock, 4 * sizeof(int));
@@ -128,22 +127,22 @@ void	deplace_up(int **tab)
 	
 }
 
-void	do_action(int **tab, int action)
+void	do_action(int tab[4][4], int action)
 {
 	if (action == KEY_UP)
 		join_up(tab);
-	else if (action == KEY_DOWN)
+	/*else if (action == KEY_DOWN)
 		join_down(tab);
 	else if (action == KEY_LEFT)
 		join_left(tab);
 	else if (action == KEY_RIGHT)
-		join_right(tab);
+		join_right(tab);*/
 	if (action == KEY_UP)
 		deplace_up(tab);
-	else if (action == KEY_DOWN)
+	/*else if (action == KEY_DOWN)
 		deplace_down(tab);
 	else if (action == KEY_LEFT)
 		deplace_left(tab);
 	else if (action == KEY_RIGHT)
-		deplace_right(tab);
+		deplace_right(tab);*/
 } 
