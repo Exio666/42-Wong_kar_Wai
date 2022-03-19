@@ -126,19 +126,6 @@ void	deplace_up(int tab[4][4])
 	
 }
 
-bool compare_tab(int a[4][4], int b[4][4])
-{
-	for (int i = 0; i < 4; ++i)
-	{
-		for (int j = 0; j < 4; ++j)
-		{
-			if (a[i][j] != b[i][j])
-				return (false);
-		}
-	}
-	return (true);
-}
-
 void	do_action(int tab[4][4], int action)
 {
 	int before[4][4];
@@ -159,7 +146,7 @@ void	do_action(int tab[4][4], int action)
 		deplace_left(tab);
 	else if (action == KEY_RIGHT)
 		deplace_right(tab);*/
-	if (!compare_tab(before, tab))
+	if (ft_memcmp(before, tab, sizeof(int) * 16))
 	{
 		// Add new tile
 	}
