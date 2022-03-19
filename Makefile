@@ -1,9 +1,23 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/03/19 16:57:56 by bsavinel          #+#    #+#              #
+#    Updated: 2022/03/19 16:58:34 by bsavinel         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 OBJS_PATH =	objs/
 
 SRCS_PATH =	srcs/
 
 SRCS_LIBFT	= 	$(addprefix $(PATH_LIBFT),	\
 				game/game.c					\
+				game/join.c					\
+				game/deplace.c				\
 				test.c						\
 				display/render.c)
 

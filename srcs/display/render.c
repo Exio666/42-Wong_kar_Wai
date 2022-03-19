@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:01:12 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/19 16:43:26 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/19 17:08:35 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int render(int board[4][4])
 
 	ft_printf("\r\n");
 	print_divider_row(box_w);
-
+	
 	for (int row = 0; row < 4; ++row)
 	{
 		for (int box_row = 0; box_row < box_h; ++box_row)
