@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:01:12 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/19 14:47:51 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/19 16:43:26 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int render(int board[4][4])
 			{
 				for (int i = 0; i < box_w; ++i)
 				{
-					if (box_row == center_y && i == center_x - digits_in_int(board[row][col]) / 2)
+					if (box_row == center_y && i == center_x - digits_in_int(board[row][col]) / 2 && board[row][col] != 0)
 					{
 						i += ft_printf("%d", board[row][col]);
 						--i;

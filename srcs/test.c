@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:01:12 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/19 15:52:48 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/19 16:48:31 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int main()
 	raw();
 	nodelay(win, TRUE);
 	noecho();
-	//box(stdscr, 0, 0);
 	signal(28, handler_size_term);
 	init_tab(board);
 	render(board);
@@ -41,18 +40,15 @@ int main()
 		i = getch();      
 		if (g_resize == 1)
 		{
-			ft_printf("Resize\n\r");
 			g_resize = 0;
-			// delscreen(win);
 			endwin();
 			win = initscr();
 			keypad(win, TRUE);
 			raw();
 			nodelay(win, TRUE);
 			noecho();
+			render(board);
 		}
-		else if (i == -1)
-			continue;
 		if (i == KEY_LEFT)
 			do_action(board, i);
 		else if (i == KEY_RIGHT)
@@ -61,16 +57,26 @@ int main()
 			do_action(board, i);
 		else if (i == KEY_DOWN)
 			do_action(board, i);
-		else if (i == D_ESCAPE || i == D_NCURS_SIGINT)
+		if (CONTINUE_WIN == 1 && player_won(board))
 		{
-			ft_printf("Esc\n\r");
 			endwin();
 			delscreen(win);
+			ft_printf("You won !!!\nYour max bloc is : %i\n", get_max(board));
 			exit(0);
 		}
-		/*else
-			ft_printf("getch %i\n\r",i );*/
-		render(board);
+		if (i == D_ESCAPE || i == D_NCURS_SIGINT || !playable(board))
+		{
+			endwin();
+			delscreen(win);
+			if (player_won(board))
+				ft_printf("You won !!!\n");
+			else 
+				ft_printf("You lose !!!\n");
+			ft_printf("Your max bloc is : %i\n", get_max(board));
+			exit(0);
+		}
+		if (i != -1)
+			render(board);
 		refresh();
 	}
 	endwin();

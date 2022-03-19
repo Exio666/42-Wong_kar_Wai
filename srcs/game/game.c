@@ -6,31 +6,30 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:00:45 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/19 16:01:25 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/19 16:42:14 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "2048.h"
 
-int playable(int board[4][4])
+bool playable(int board[4][4])
 {
+	if (!is_full(board))
+		return (true);
 	for (int i = 0; i < 4; ++i)
 	{
 		for (int j = 0; j < 4; ++j)
 		{
-			if (board[i][j] == 0)
+			if (i + 1 < 4 && board[i][j] == board[i + 1][j])
 				return (true);
-			for (int k = j; k < 4; ++k)
-			{
-				if (board[i][j] == board[i][k] || board[i][j] == board[k][j])
-					return (true);
-			}
+			if (j + 1 < 4 && board[i][j] == board[i][j + 1])
+				return (true);
 		}
 	}
 	return (false);
 }
 
-int is_full(int board[4][4])
+bool is_full(int board[4][4])
 {
 	for (int i = 0; i < 4; ++i)
 	{
@@ -43,17 +42,33 @@ int is_full(int board[4][4])
 	return (true);
 }
 
-int player_won(int board[4][4])
+bool player_won(int board[4][4])
 {
 	for (int i = 0; i < 4; ++i)
 	{
 		for (int j = 0; j < 4; ++j)
 		{
-			if (board[i][j] >= 2048)
+			if (board[i][j] >= WIN_VALUE)
 				return (true);
 		}
 	}
 	return (false);
+}
+
+int get_max(int board[4][4])
+{
+	int max;
+
+	max = 0;
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (max < board[i][j])
+				max = board[i][j];
+		}
+	}
+	return (max);
 }
 
 int choose_bloc()
@@ -387,6 +402,9 @@ void	deplace_left(int tab[4][4])
 void	do_action(int tab[4][4], int action)
 {
 	int before[4][4];
+	int y;
+	int x;
+
 	ft_memcpy(before, tab, sizeof(int) * 16);
 	if (action == KEY_UP)
 		join_up(tab);
@@ -404,8 +422,15 @@ void	do_action(int tab[4][4], int action)
 		deplace_left(tab);
 	else if (action == KEY_RIGHT)
 		deplace_right(tab);
-	if (ft_memcmp(before, tab, sizeof(int) * 16))
+	if (ft_memcmp(before, tab, sizeof(int) * 16) && !is_full(tab))
 	{
-		// Add new tile
+		x = choose_place();
+		y = choose_place();
+		while (tab[x][y] != 0)
+		{
+			x = choose_place();
+			y = choose_place();
+		}
+		tab[x][y] = choose_bloc();
 	}
 } 
