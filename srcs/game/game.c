@@ -12,6 +12,50 @@
 
 #include "2048.h"
 
+int playable(int board[4][4])
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (board[i][j] == 0)
+				return (true);
+			for (int k = j; k < 4; ++k)
+			{
+				if (board[i][j] == board[i][k] || board[i][j] == board[k][j])
+					return (true);
+			}
+		}
+	}
+	return (false);
+}
+
+int is_full(int board[4][4])
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (board[i][j] == 0)
+				return (false);
+		}
+	}
+	return (true);
+}
+
+int player_won(int board[4][4])
+{
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			if (board[i][j] >= 2048)
+				return (true);
+		}
+	}
+	return (false);
+}
+
 int choose_bloc()
 {
 	int nbr;
@@ -98,6 +142,7 @@ void	join_up(int tab[4][4])
 		y++;
 	}	
 }
+
 
 void	join_down(int tab[4][4])
 {
@@ -268,6 +313,7 @@ void	deplace_right(int tab[4][4])
 	
 }
 
+
 void	deplace_up(int tab[4][4])
 {
 	int stock[4];
@@ -340,6 +386,8 @@ void	deplace_left(int tab[4][4])
 
 void	do_action(int tab[4][4], int action)
 {
+	int before[4][4];
+	ft_memcpy(before, tab, sizeof(int) * 16);
 	if (action == KEY_UP)
 		join_up(tab);
 	else if (action == KEY_DOWN)
@@ -356,4 +404,8 @@ void	do_action(int tab[4][4], int action)
 		deplace_left(tab);
 	else if (action == KEY_RIGHT)
 		deplace_right(tab);
+	if (ft_memcmp(before, tab, sizeof(int) * 16))
+	{
+		// Add new tile
+	}
 } 
