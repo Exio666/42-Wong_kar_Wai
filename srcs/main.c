@@ -12,14 +12,6 @@
 
 #include "2048.h"
 
-int g_resize = 0;
-
-void handler_size_term(int signal)
-{
-	(void)signal;
-	g_resize = 1;
-}
-
 int main()
 {
 	int board[4][4];
@@ -35,31 +27,12 @@ int main()
 	srand(time(NULL));
 	if (Err == 0 || keypad(win, TRUE) || raw() || nodelay(win, TRUE) || noecho())
 		Err = -1;
-	signal(28, handler_size_term);
 	init_tab(board);
 	if (Err == 1)
 		render(board);
 	while (Err == 1)
 	{
 		i = getch();      
-		if (g_resize == 1)
-		{
-			g_resize = 0;
-			endwin();
-			win = initscr();
-			if (!win)
-			{
-				endwin();
-				break ;
-			}
-			if (keypad(win, TRUE) || raw() || nodelay(win, TRUE) || noecho())
-			{
-				endwin();
-				delscreen(win);
-				break ;
-			}
-			render(board);
-		}
 		if (i == KEY_LEFT)
 			do_action(board, i);
 		else if (i == KEY_RIGHT)
