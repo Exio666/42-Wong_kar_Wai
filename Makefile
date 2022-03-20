@@ -18,7 +18,7 @@ SRCS_LIBFT	= 	$(addprefix $(PATH_LIBFT),	\
 				game/game.c					\
 				game/join.c					\
 				game/deplace.c				\
-				test.c						\
+				main.c						\
 				display/render.c)
 
 SRCS = $(SRCS_GNL) $(SRCS_LIBFT) $(SRCS_PFT)
