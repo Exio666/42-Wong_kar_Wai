@@ -105,7 +105,6 @@ void init_tab(int tab[4][4])
 {
 	int x;
 	int y;
-	int i;
 	int x2;
 	int y2;
 	
@@ -120,7 +119,6 @@ void init_tab(int tab[4][4])
 		}
 		x++;
 	}
-	i = 0;
 	x = choose_place();
 	y = choose_place();
 	tab[x][y] = choose_bloc();
