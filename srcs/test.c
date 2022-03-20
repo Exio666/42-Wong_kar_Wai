@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:01:12 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/20 10:32:14 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/20 10:39:37 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ int main()
 	int board[4][4];
 	int i;
 	void *win;
+	int 	Err;
 
 	i = 0;
+	Err = 1;
 	win = initscr();
+	if (!win)
+		exit(0);
 	srand(time(NULL));
-	keypad(win, TRUE);
-	raw();
-	nodelay(win, TRUE);
-	noecho();
+	if (keypad(win, TRUE) || raw() || nodelay(win, TRUE) || noecho())
+		Err = 0;
 	signal(28, handler_size_term);
 	init_tab(board);
 	render(board);
-	while (1)
+	while (Err)
 	{
 		i = getch();      
 		if (g_resize == 1)
@@ -44,10 +46,17 @@ int main()
 			g_resize = 0;
 			endwin();
 			win = initscr();
-			keypad(win, TRUE);
-			raw();
-			nodelay(win, TRUE);
-			noecho();
+			if (!win)
+			{
+				endwin();
+				exit(0);
+			}
+			if (keypad(win, TRUE) || raw() || nodelay(win, TRUE) || noecho())
+			{
+				endwin();
+				delscreen(win);
+				exit(0);
+			}
 			render(board);
 		}
 		if (i == KEY_LEFT)
@@ -81,4 +90,5 @@ int main()
 		refresh();
 	}
 	endwin();
+	delscreen(win);
 }
