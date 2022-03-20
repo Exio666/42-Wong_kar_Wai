@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:01:12 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/20 10:52:43 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/20 11:21:14 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ int main()
 	Err = 1;
 	win = initscr();
 	if (!win)
-		exit(0);
+		Err = -2;
 	srand(time(NULL));
-	if (keypad(win, TRUE) || raw() || nodelay(win, TRUE) || noecho())
-		Err = 0;
+	if (Err == 0 || keypad(win, TRUE) || raw() || nodelay(win, TRUE) || noecho())
+		Err = -1;
 	signal(28, handler_size_term);
 	init_tab(board);
-	render(board);
-	while (Err)
+	if (Err == 1)
+		render(board);
+	while (Err == 1)
 	{
 		i = getch();      
 		if (g_resize == 1)
@@ -49,13 +50,13 @@ int main()
 			if (!win)
 			{
 				endwin();
-				exit(0);
+				break ;
 			}
 			if (keypad(win, TRUE) || raw() || nodelay(win, TRUE) || noecho())
 			{
 				endwin();
 				delscreen(win);
-				exit(0);
+				break ;
 			}
 			render(board);
 		}
@@ -74,7 +75,7 @@ int main()
 			ft_putstr_fd("You won !!!\nYour max bloc is : ", 1);
 			ft_putnbr_fd(get_max(board), 1);
 			ft_putchar_fd('\n', 1);
-			exit(0);
+			break ;
 		}
 		if (i == D_ESCAPE || i == D_NCURS_SIGINT || !playable(board))
 		{
@@ -87,12 +88,15 @@ int main()
 			ft_putstr_fd("Your max bloc is : ", 1);
 			ft_putnbr_fd(get_max(board), 1);
 			ft_putchar_fd('\n', 1);
-			exit(0);
+			break ;
 		}
 		if (i != -1)
 			render(board);
 		refresh();
 	}
-	endwin();
-	delscreen(win);
+	if (Err == -1)
+	{
+		endwin();
+		delscreen(win);
+	}
 }
