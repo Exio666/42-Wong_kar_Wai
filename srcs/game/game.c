@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:00:45 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/19 16:56:11 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/20 10:27:02 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 bool playable(int board[4][4])
 {
+	if (get_max(board) >= 2048)
+		return (false);
 	if (!is_full(board))
 		return (true);
 	for (int i = 0; i < 4; ++i)
@@ -43,7 +45,14 @@ bool is_full(int board[4][4])
 }
 
 bool player_won(int board[4][4])
-{
+{	
+	int win;
+
+	win = 1;
+	while (win < WIN_VALUE && win < 8000)
+		win *= 2;
+	if (win != WIN_VALUE)
+		return (false);
 	for (int i = 0; i < 4; ++i)
 	{
 		for (int j = 0; j < 4; ++j)

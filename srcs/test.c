@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:01:12 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/19 17:32:47 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/20 10:32:14 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main()
 	int board[4][4];
 	int i;
 	void *win;
+
 	i = 0;
 	win = initscr();
 	srand(time(NULL));
