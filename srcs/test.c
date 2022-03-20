@@ -6,7 +6,7 @@
 /*   By: bsavinel <bsavinel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 10:01:12 by bsavinel          #+#    #+#             */
-/*   Updated: 2022/03/20 10:39:37 by bsavinel         ###   ########.fr       */
+/*   Updated: 2022/03/20 10:52:43 by bsavinel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ int main()
 		{
 			endwin();
 			delscreen(win);
-			ft_printf("You won !!!\nYour max bloc is : %i\n", get_max(board));
+			ft_putstr_fd("You won !!!\nYour max bloc is : ", 1);
+			ft_putnbr_fd(get_max(board), 1);
+			ft_putchar_fd('\n', 1);
 			exit(0);
 		}
 		if (i == D_ESCAPE || i == D_NCURS_SIGINT || !playable(board))
@@ -79,10 +81,12 @@ int main()
 			endwin();
 			delscreen(win);
 			if (player_won(board))
-				ft_printf("You won !!!\n");
+				ft_putstr_fd("You won !!!\n", 1);
 			else 
-				ft_printf("You lose !!!\n");
-			ft_printf("Your max bloc is : %i\n", get_max(board));
+				ft_putstr_fd("You lose !!!\n", 1);
+			ft_putstr_fd("Your max bloc is : ", 1);
+			ft_putnbr_fd(get_max(board), 1);
+			ft_putchar_fd('\n', 1);
 			exit(0);
 		}
 		if (i != -1)
